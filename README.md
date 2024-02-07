@@ -1,2 +1,2 @@
 # CivilGuruji_AssignmentProject
-An assignment project for Civil Guruji
+A MERN stack assignment project for Civil Guruji
