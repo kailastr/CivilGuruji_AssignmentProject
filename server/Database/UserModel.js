@@ -8,7 +8,8 @@ const UserSchema = new Schema({
     fullName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String },
-    phoneNum: { type: String }
+    phoneNum: { type: String },
+    lastLogin: { type: String }
 },
     {
         timestamps: true
@@ -43,6 +44,7 @@ UserSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
     if (!doesPasswordMatch) {
         throw new Error("Invalid password");
     }
+
 
     return user;
 };

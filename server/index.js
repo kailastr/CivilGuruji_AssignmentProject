@@ -19,6 +19,22 @@ app.use(express.json());
 
 DBConnect();
 
+//get all user details
+app.get('/', async (req, res) => {
+    try {
+        const allData = await UserModal.find({});
+
+        return res.status(200).json({
+            message: "success",
+            data: allData
+        });
+    } catch (error) {
+        return res.json({
+            message: error
+        })
+    }
+})
+
 //signUp
 app.post('/signup', async (req, res) => {
     try {
@@ -44,6 +60,15 @@ app.post('/signin', async (req, res) => {
     try {
         const user = await UserModal.findByEmailAndPassword(req.body);
 
+        const currentDate= new Date().toISOString();
+
+        const updatedUser = await UserModal.findOneAndUpdate(
+            { _id: user._id }, // Assuming user._id is the unique identifier for the user
+            { $set: { lastLogin: currentDate } },
+            { new: true } // To return the updated user document
+        );
+        console.log(updatedUser)
+
         const token = await user.generateJwtToken();
 
         return res.status(200).json({
@@ -64,3 +89,10 @@ const port = 4000;
 app.listen(port, () => {
     console.log("Your server is started at port : " + port);
 });
+
+
+// string to iso
+// const isoDateString = "2024-02-08T12:30:45.678Z";
+
+// // Convert ISO string to Date object
+// const dateObject = new Date(isoDateString);
