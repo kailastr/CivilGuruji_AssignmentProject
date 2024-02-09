@@ -15,9 +15,10 @@ const Table = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log("fetch fn data :", data.data);
-                
+
                 setColumnData(data.data);
+                const date = data.data;
+                console.log("fetch date :", date);
             })
             .catch(error => {
                 console.log('error', error);
@@ -44,59 +45,31 @@ const Table = () => {
             fixed: true,
         },
         {
-            name: 'Mark',
-            selector: row => row.mark,
+            name: 'Last Login',
+            selector: row => row.lastLogin,
+            sortable: true,
+            fixed: true,
+        },
+        {
+            name: 'Logged in before 5 days',
+            selector: row => row.exceededFiveDays,
             sortable: true,
             fixed: true,
         },
     ]
 
-    // const tableDataItems = [
-    //     {
-    //         fullName: columnData.fullName,
-    //         mobile: columnData.phoneNum,
-    //         email: columnData.email,
-    //         mark: '100'
-    //     }
-    // ]
-
-    
     const tableDataItems = Array.isArray(columnData) ? columnData.map((item, index) => ({
-        
         id: index,
         fullName: item.fullName,
         mobile: item.phoneNum,
         email: item.email,
-        mark: '100'
+        lastLogin: item.lastLogin,
+        exceededFiveDays: item.exceededFiveDays
     })) : [];
-
-    // const tableDataItems = [
-    //     {
-    //         id: 1,
-    //         fullName: 'Kailas',
-    //         mobile: '566645',
-    //         email: 'sdghdrh5675ghb',
-    //         mark: '55'
-    //     },
-    //     {
-    //         id: 1,
-    //         fullName: 'Navas',
-    //         mobile: '566645',
-    //         email: 'sdghdrh5675ghb',
-    //         mark: '39'
-    //     },
-    //     {
-    //         id: 1,
-    //         fullName: 'Zishan',
-    //         mobile: '566645',
-    //         email: 'sdghdrh5675ghb',
-    //         mark: '100'
-    //     },
-    // ]
 
     const conditionalRowStyles = [
         {
-            when: row => row.mark < 50,
+            when: row => row.mark > 60,
             style: {
                 backgroundColor: 'rgba(240, 240, 240, 0.9)',
                 color: 'black',
@@ -116,7 +89,7 @@ const Table = () => {
             },
         },
         {
-            when: row => row.mark >= 60,
+            when: row => row.exceededFiveDays === "true",
             style: {
                 backgroundColor: 'rgba(242, 38, 19, 0.9)',
                 color: 'white',

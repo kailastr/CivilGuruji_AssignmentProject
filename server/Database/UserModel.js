@@ -9,7 +9,8 @@ const UserSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String },
     phoneNum: { type: String },
-    lastLogin: { type: String }
+    lastLogin: { type: Date },
+    exceededFiveDays: {type: String}
 },
     {
         timestamps: true
@@ -39,6 +40,7 @@ UserSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
     if (!user) {
         throw new Error("User not found with this email");
     }
+    
 
     const doesPasswordMatch = await bcrypt.compare(password, user.password);
     if (!doesPasswordMatch) {

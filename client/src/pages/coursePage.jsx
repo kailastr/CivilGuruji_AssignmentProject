@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, Fragment } from 'react';
 import CourseCard from '../components/courseCard';
 
 const coursePage = () => {
@@ -32,6 +32,7 @@ const coursePage = () => {
 
     return (
         <>
+
             <div className=' items-center'>
                 <h1 className='text-2xl block text-center mt-10 w-full h-20'>Courses offered</h1>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-20'>

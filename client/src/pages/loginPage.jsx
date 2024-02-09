@@ -68,7 +68,7 @@ const LoginPage = () => {
                     {/* bottom div */}
 
                     <div className='w-full flex justify-center align-middle my-4 mx-2'>
-                        <Link to={"##"} >
+                        <Link to={"/signup"} >
                             <p className='text-blue-600 hover:text-blue-800 mb-10'>Don't have an account to Login ?</p>
                         </Link>
                     </div>
