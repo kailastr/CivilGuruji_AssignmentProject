@@ -1,7 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import CourseCard from '../components/courseCard';
 
-const coursePage = () => {
+import DefaultLayout from '../layouts/DefaultPageLayout';
+
+const CoursePage = () => {
 
     const courseDetails = [
         {
@@ -45,4 +47,4 @@ const coursePage = () => {
     )
 }
 
-export default coursePage
+export default DefaultLayout(CoursePage);

@@ -26,8 +26,6 @@ fiveDaysAgo.setDate(currentDate.getDate() - 5);
 //get all user details
 app.get('/', async (req, res) => {
     try {
-
-        console.log(fiveDaysAgo);
         const inactiveUsers = await UserModal.find({ lastLogin: { $lt: fiveDaysAgo } });
 
         return res.status(200).json({
@@ -82,8 +80,6 @@ app.post('/signin', async (req, res) => {
         const diff = fiveDaysAgo - currentDate;
 
         let days = Math.round(diff / (1000 * 60 * 60 * 24));
-
-        console.log(`diffence :  ${days} \n current date ${currentDate} \n five days ago ${fiveDaysAgo}`);
 
         await UserModal.updateMany(
             { lastLogin: { $lt: fiveDaysAgo } }, // Filter condition: Users who haven't logged in for more than 5 days

@@ -6,6 +6,8 @@ import LoginPage from './pages/loginPage';
 import SignupPage from './pages/signupPage';
 import HomePage from './pages/homePage';
 import CoursePage from './pages/coursePage';
+import NotLoggedIn from './pages/NotLoggedIn';
+import NotPurchased from './pages/NotPurchased';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/dashboard' element={<HomePage />} />
         <Route path='/course' element={<CoursePage />} />
+        <Route path='/usernotloggedin' element={<NotLoggedIn />} />
+        <Route path='/usercoursepotpurchased' element={<NotPurchased />} />
       </Routes>
     </>
   );

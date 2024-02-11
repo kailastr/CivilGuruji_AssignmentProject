@@ -7,18 +7,14 @@ const CourseCard = (props) => {
 
     let [isOpen, setIsOpen] = useState(false);
 
-    function closeModal() {
-        setIsOpen(false)
-    }
-
-    function openModal() {
-        setIsOpen(true)
-    }
-
     return (
         <>
-            <div className='bg-white p-4 mb-4 w-full rounded-2xl transition duration-700 ease-in-out sm:drop-shadow-md md:shadow-none lg:shadow-none hover:drop-shadow-lg '>
-                <div className='w-full relative'>
+            <div
+                className='bg-white p-4 mb-4 w-full rounded-2xl transition duration-700 ease-in-out sm:drop-shadow-md md:shadow-none lg:shadow-none hover:drop-shadow-lg'
+            >
+                <div
+                    className='w-full relative'
+                >
                     <div className='w-full bottom-4 flex items-end justify-between'>
                         <img
                             src={props.img}
@@ -27,17 +23,13 @@ const CourseCard = (props) => {
                         />
                     </div>
                     <div className='my-2 flex flex-col gap-2'>
-                        <div className='flex items-center justify-between'>
+                        <div className='flex items-center justify-center my-5'>
                             <h4 className='text-xl font-medium'>{props.title}</h4>
-                        </div>
-                        <div className='flex items-center justify-between text-gray-500 gap-2'>
-                            <p className='truncate w-3/5'>{props.description}</p>
-                            <p className='2/5'>₹ {props.price}</p>
                         </div>
                         <div className='flex items-center justify-center'>
                             <button
                                 type="button"
-                                onClick={openModal}
+                                onClick={() => setIsOpen(true)}
                                 className='w-1/2 h-10 text-lg rounded-lg bg-blue-400 hover:bg-blue-500 transition duration-200 ease-in-out'
                             >
                                 View Course details
@@ -47,8 +39,9 @@ const CourseCard = (props) => {
                 </div>
             </div>
 
+            {/* modal */}
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <Dialog as="div" className="relative z-10" onClose={() => setIsOpen(false)}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -77,30 +70,36 @@ const CourseCard = (props) => {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Payment successful
+                                        {props.title}
                                     </Dialog.Title>
                                     <div className="mt-2">
-                                        <p className="text-sm text-gray-500">
-                                            Your payment has been successfully submitted. We’ve sent
-                                            you an email with all of the details of your order.
+                                        <p className="text-sm text-yellow-500">
+                                            {props.description}
                                         </p>
                                     </div>
 
-                                    <div className="mt-4">
+                                    <div className="mt-4 flex gap-3">
                                         <button
                                             type="button"
                                             className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={closeModal}
+                                            onClick={() => setIsOpen(false)}
                                         >
-                                            Got it, thanks!
+                                            Purchase Course
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            Cancel
                                         </button>
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
-                    </div>
-                </Dialog>
-            </Transition>
+                    </div >
+                </Dialog >
+            </Transition >
         </>
     )
 }
